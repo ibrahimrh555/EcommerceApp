@@ -132,15 +132,6 @@ L'application sera disponible sur **http://localhost:3000**
 
 ---
 
-## 🔐 Compte de démonstration
-
-Après avoir exécuté `node seed.js` :
-
-| Email          | Mot de passe | Rôle  |
-|----------------|--------------|-------|
-| admin@shop.com | admin123     | Admin |
-
----
 
 ## 🚀 Déploiement
 
