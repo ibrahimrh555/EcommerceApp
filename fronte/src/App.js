@@ -3,17 +3,23 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
+import { AdminProvider } from './context/AdminContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import ProductList from './filtres/ProductList';
 import ProductPage from './filtres/ProductPage';
 import Cart from './filtres/Cart';
 import Login from './filtres/Login';
 import Register from './filtres/Register';
 import Orders from './filtres/Orders';
 import OrderDetail from './filtres/OrderDetail';
-import ProductList from './filtres/ProductList';
-import Products from './filtres/Products';
-
+import AdminRoute from './components/AdminRoute';
+import AdminLayout from './components/AdminLayout';
+import AdminLogin from './pages/AdminLogin';
+import Dashboard from './pages/Dashboard';
+import AdminProducts from './pages/Products';
+import AdminOrders from './pages/Orders';
+import AdminUsers from './pages/Users';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -24,41 +30,48 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <Router>
-          <style>{`
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { background: #09090f; }
-            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
-            @keyframes spin { to { transform: rotate(360deg); } }
-            input::placeholder { color: rgba(255,255,255,0.2); }
-            a:hover { opacity: 0.85; }
-          `}</style>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalogue" element={<ProductList />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
-            <Route path="/orders/:id" element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
-          </Routes>
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: '#1a1a2e',
-                color: '#fff',
-                border: '1px solid rgba(255,215,0,0.2)',
-                borderRadius: '8px',
-              },
-              success: { iconTheme: { primary: '#FFD700', secondary: '#000' } },
-            }}
-          />
-        </Router>
+        <AdminProvider>
+          <Router>
+            <style>{`
+              * { margin: 0; padding: 0; box-sizing: border-box; }
+              body { background: #09090f; }
+              @keyframes spin { to { transform: rotate(360deg); } }
+              input::placeholder { color: rgba(255,255,255,0.2); }
+              select option { background: #1a1a2e; color: #fff; }
+              a:hover { opacity: 0.85; }
+            `}</style>
+            <Routes>
+
+              {/* ── ADMIN routes (own layout, no shop Navbar) ── */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+                <Route index element={<Navigate to="/admin/dashboard" replace />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="products" element={<AdminProducts />} />
+                <Route path="orders" element={<AdminOrders />} />
+                <Route path="users" element={<AdminUsers />} />
+              </Route>
+
+              {/* ── SHOP routes (with Navbar) ── */}
+              <Route path="/" element={<><Navbar /><Home /></>} />
+              <Route path="/catalogue" element={<><Navbar /><ProductList /></>} />
+              <Route path="/product/:id" element={<><Navbar /><ProductPage /></>} />
+              <Route path="/cart" element={<><Navbar /><Cart /></>} />
+              <Route path="/login" element={<><Navbar /><Login /></>} />
+              <Route path="/register" element={<><Navbar /><Register /></>} />
+              <Route path="/orders" element={<><Navbar /><PrivateRoute><Orders /></PrivateRoute></>} />
+              <Route path="/orders/:id" element={<><Navbar /><PrivateRoute><OrderDetail /></PrivateRoute></>} />
+
+            </Routes>
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                style: { background: '#1a1a2e', color: '#fff', border: '1px solid rgba(255,215,0,0.2)', borderRadius: '8px' },
+                success: { iconTheme: { primary: '#FFD700', secondary: '#000' } },
+              }}
+            />
+          </Router>
+        </AdminProvider>
       </CartProvider>
     </AuthProvider>
   );

@@ -21,10 +21,7 @@ mongoose
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
-<<<<<<< HEAD
 app.use('/api/admin', require('./routes/adminRoutes'));
-=======
->>>>>>> 484150456245d5c1c2109f3b82d18a94ad11d19f
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date() }));
