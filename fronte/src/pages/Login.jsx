@@ -106,7 +106,7 @@ export default function Login() {
 
 const styles = {
   page: {
-    minHeight: '100vh', background: '#09090f',
+    minHeight: '100vh', background: 'var(--bg)',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     fontFamily: 'system-ui, sans-serif', padding: '2rem',
     position: 'relative', overflow: 'hidden',
@@ -118,7 +118,7 @@ const styles = {
     borderRadius: '50%', pointerEvents: 'none',
   },
   card: {
-    background: 'rgba(255,255,255,0.04)',
+    background: 'var(--surface)',
     border: '1px solid rgba(255,215,0,0.15)',
     borderRadius: '18px', padding: '2.5rem',
     width: '100%', maxWidth: '440px',
@@ -130,16 +130,16 @@ const styles = {
   },
   logoIcon: { color: '#FFD700', fontSize: '1.2rem' },
   logoText: {
-    color: '#fff', fontFamily: '"Playfair Display", Georgia, serif',
+    color: 'var(--text)', fontFamily: '"Playfair Display", Georgia, serif',
     fontSize: '1.3rem', fontWeight: 700, letterSpacing: '0.05em',
   },
   logoAccent: { color: '#FFD700' },
   title: {
     fontSize: '1.6rem', fontFamily: '"Playfair Display", serif',
-    textAlign: 'center', marginBottom: '0.4rem', color: '#fff',
+    textAlign: 'center', marginBottom: '0.4rem', color: 'var(--text)',
   },
   sub: {
-    color: 'rgba(255,255,255,0.35)', fontSize: '0.85rem',
+    color: 'var(--text-faint)', fontSize: '0.85rem',
     textAlign: 'center', marginBottom: '1.75rem',
   },
   errorBox: {
@@ -150,14 +150,14 @@ const styles = {
   form: { display: 'flex', flexDirection: 'column', gap: '1.1rem' },
   field: {},
   label: {
-    display: 'block', color: 'rgba(255,255,255,0.45)',
+    display: 'block', color: 'var(--text-subtle)',
     fontSize: '0.8rem', marginBottom: '6px', letterSpacing: '0.04em',
   },
   input: {
     width: '100%', padding: '11px 14px',
-    background: 'rgba(255,255,255,0.06)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    borderRadius: '8px', color: '#fff',
+    background: 'var(--surface-2)',
+    border: '1px solid var(--border-2)',
+    borderRadius: '8px', color: 'var(--text)',
     fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box',
     transition: 'border-color 0.2s',
   },
@@ -174,7 +174,7 @@ const styles = {
     borderRadius: '50%', animation: 'spin 0.7s linear infinite',
   },
   registerRow: {
-    textAlign: 'center', color: 'rgba(255,255,255,0.4)',
+    textAlign: 'center', color: 'var(--text-subtle)',
     fontSize: '0.88rem', marginTop: '1.25rem',
   },
   link: { color: '#FFD700', textDecoration: 'none', fontWeight: 600 },

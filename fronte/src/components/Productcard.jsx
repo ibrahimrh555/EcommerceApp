@@ -69,13 +69,13 @@ export default function ProductCard({ product }) {
 
 const s = {
   card: {
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: 'var(--surface)',
+    border: '1px solid var(--border)',
     borderRadius: '12px', overflow: 'hidden',
     transition: 'transform 0.2s, border-color 0.2s',
   },
   cardLink: { textDecoration: 'none', color: 'inherit', display: 'block' },
-  imageWrap: { position: 'relative', paddingBottom: '66%', overflow: 'hidden', background: '#1a1a2e' },
+  imageWrap: { position: 'relative', paddingBottom: '66%', overflow: 'hidden', background: 'var(--image-bg)' },
   cardImg: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' },
   categoryBadge: {
     position: 'absolute', top: '10px', left: '10px',
@@ -91,7 +91,7 @@ const s = {
     position: 'absolute', top: '8px', right: '8px',
     width: '32px', height: '32px', borderRadius: '50%',
     background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.15)',
-    color: 'rgba(255,255,255,0.5)', fontSize: '1rem', cursor: 'pointer',
+    color: 'rgba(255,255,255,0.7)', fontSize: '1rem', cursor: 'pointer',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     transition: 'all 0.2s', zIndex: 2,
   },
@@ -104,7 +104,7 @@ const s = {
   cardName: { fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem', lineHeight: 1.4 },
   cardMeta: { display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '1rem' },
   stars: { color: '#FFD700', fontSize: '0.8rem' },
-  reviews: { color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem' },
+  reviews: { color: 'var(--text-subtle)', fontSize: '0.78rem' },
   cardFooter: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
   price: { fontSize: '1.25rem', fontWeight: 700, color: '#FFD700' },
   addBtn: {

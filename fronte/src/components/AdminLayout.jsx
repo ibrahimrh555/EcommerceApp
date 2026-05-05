@@ -30,22 +30,22 @@ export default function AdminLayout() {
 }
 
 const styles = {
-  shell: { display: 'flex', background: '#0d0d16', minHeight: '100vh', color: '#fff', fontFamily: 'system-ui, sans-serif' },
+  shell: { display: 'flex', background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)', fontFamily: 'system-ui, sans-serif' },
   main: { flex: 1, transition: 'margin-left 0.25s ease', display: 'flex', flexDirection: 'column', minHeight: '100vh' },
   topbar: {
     height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
     padding: '0 1.5rem',
-    background: 'rgba(10,10,18,0.95)',
-    borderBottom: '1px solid rgba(255,255,255,0.07)',
+    background: 'var(--nav-bg)',
+    borderBottom: '1px solid var(--border)',
     position: 'sticky', top: 0, zIndex: 50,
   },
   toggleBtn: {
-    background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)',
+    background: 'none', border: 'none', color: 'var(--text-subtle)',
     cursor: 'pointer', padding: '6px', borderRadius: '6px',
   },
   topbarRight: { display: 'flex', alignItems: 'center', gap: '1rem' },
   badge: {
-    background: 'rgba(255,215,0,0.15)', color: '#FFD700',
+    background: 'var(--accent-soft)', color: 'var(--accent)',
     padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem',
     border: '1px solid rgba(255,215,0,0.3)', letterSpacing: '0.05em',
   },

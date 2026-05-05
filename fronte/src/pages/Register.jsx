@@ -69,18 +69,18 @@ export default function Register() {
 }
 
 const styles = {
-  page: { background: '#09090f', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'system-ui, sans-serif', padding: '2rem' },
-  card: { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,215,0,0.15)', borderRadius: '16px', padding: '3rem', width: '100%', maxWidth: '420px' },
+  page: { background: 'var(--bg)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'system-ui, sans-serif', padding: '2rem', color: 'var(--text)' },
+  card: { background: 'var(--surface)', border: '1px solid rgba(255,215,0,0.15)', borderRadius: '16px', padding: '3rem', width: '100%', maxWidth: '420px' },
   logoSection: { display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', justifyContent: 'center' },
   logoIcon: { color: '#FFD700', fontSize: '1.1rem' },
-  title: { color: '#fff', fontSize: '1.4rem', fontFamily: '"Playfair Display", Georgia, serif', letterSpacing: '0.05em' },
+  title: { color: 'var(--text)', fontSize: '1.4rem', fontFamily: '"Playfair Display", Georgia, serif', letterSpacing: '0.05em' },
   accent: { color: '#FFD700' },
-  subtitle: { fontSize: '1.3rem', color: '#fff', marginBottom: '0.5rem', fontFamily: '"Playfair Display", Georgia, serif' },
-  hint: { color: 'rgba(255,255,255,0.45)', fontSize: '0.9rem', marginBottom: '2rem' },
+  subtitle: { fontSize: '1.3rem', color: 'var(--text)', marginBottom: '0.5rem', fontFamily: '"Playfair Display", Georgia, serif' },
+  hint: { color: 'var(--text-subtle)', fontSize: '0.9rem', marginBottom: '2rem' },
   link: { color: '#FFD700', textDecoration: 'none' },
   form: { display: 'flex', flexDirection: 'column', gap: '1.2rem' },
   field: {},
-  label: { display: 'block', color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', marginBottom: '6px' },
-  input: { width: '100%', padding: '12px 14px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '8px', color: '#fff', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' },
+  label: { display: 'block', color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '6px' },
+  input: { width: '100%', padding: '12px 14px', background: 'var(--surface-2)', border: '1px solid var(--border-2)', borderRadius: '8px', color: 'var(--text)', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' },
   btn: { padding: '14px', background: '#FFD700', color: '#000', border: 'none', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', marginTop: '0.5rem' },
 };

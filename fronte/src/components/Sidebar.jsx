@@ -70,8 +70,8 @@ export default function Sidebar({ open }) {
 const styles = {
   sidebar: {
     height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: 100,
-    background: '#0a0a12',
-    borderRight: '1px solid rgba(255,215,0,0.12)',
+    background: 'var(--nav-bg)',
+    borderRight: '1px solid var(--accent-border)',
     display: 'flex', flexDirection: 'column',
     transition: 'width 0.25s ease',
     overflow: 'hidden',
@@ -79,23 +79,23 @@ const styles = {
   logo: {
     display: 'flex', alignItems: 'center', gap: '10px',
     padding: '1.5rem 1rem 1.5rem 1.2rem',
-    borderBottom: '1px solid rgba(255,255,255,0.06)',
+    borderBottom: '1px solid var(--border)',
     minHeight: '64px',
     whiteSpace: 'nowrap',
   },
   logoIcon: { color: '#FFD700', fontSize: '1.2rem', flexShrink: 0 },
-  logoText: { color: '#fff', fontFamily: '"Playfair Display", Georgia, serif', fontSize: '1rem', fontWeight: 700, letterSpacing: '0.05em' },
-  logoAccent: { color: '#FFD700' },
+  logoText: { color: 'var(--text)', fontFamily: '"Playfair Display", Georgia, serif', fontSize: '1rem', fontWeight: 700, letterSpacing: '0.05em' },
+  logoAccent: { color: 'var(--accent)' },
   nav: { flex: 1, padding: '1rem 0', display: 'flex', flexDirection: 'column', gap: '2px' },
   navItem: {
     display: 'flex', alignItems: 'center', gap: '12px',
     padding: '0.7rem 1.2rem', textDecoration: 'none',
-    color: 'rgba(255,255,255,0.45)', borderRadius: '0',
+    color: 'var(--text-subtle)', borderRadius: '0',
     transition: 'all 0.15s', whiteSpace: 'nowrap',
     borderLeft: '3px solid transparent',
   },
   navActive: {
-    color: '#FFD700',
+    color: 'var(--accent)',
     background: 'rgba(255,215,0,0.08)',
     borderLeft: '3px solid #FFD700',
   },
@@ -103,7 +103,7 @@ const styles = {
   navLabel: { fontSize: '0.9rem', fontWeight: 500 },
   bottom: {
     padding: '1rem',
-    borderTop: '1px solid rgba(255,255,255,0.06)',
+    borderTop: '1px solid var(--border)',
     display: 'flex', flexDirection: 'column', gap: '0.75rem',
   },
   adminInfo: { display: 'flex', alignItems: 'center', gap: '10px', overflow: 'hidden' },

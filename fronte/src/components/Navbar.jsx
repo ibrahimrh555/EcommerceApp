@@ -4,6 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { Gem, Heart, ShoppingCart } from 'lucide-react';
 import { useFavorites } from '../context/FavoritesContext';
+import { useTheme } from '../context/ThemeContext';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -11,6 +13,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { totalFavorites } = useFavorites();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isLight, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     logout();
@@ -50,6 +53,16 @@ export default function Navbar() {
             <ShoppingCart size={22} aria-hidden="true" />
             {totalItems > 0 && <span style={styles.badge}>{totalItems}</span>}
           </Link>
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            style={styles.themeBtn}
+            title={isLight ? 'Mode sombre' : 'Mode clair'}
+            aria-label={isLight ? 'Activer le mode sombre' : 'Activer le mode clair'}
+          >
+            {isLight ? <FaMoon aria-hidden="true" /> : <FaSun aria-hidden="true" />}
+          </button>
         </div>
       </div>
     </nav>
@@ -61,9 +74,9 @@ const styles = {
     position: 'sticky',
     top: 0,
     zIndex: 1000,
-    background: 'rgba(8, 8, 12, 0.95)',
+    background: 'var(--nav-bg)',
     backdropFilter: 'blur(20px)',
-    borderBottom: '1px solid rgba(255,220,100,0.15)',
+    borderBottom: '1px solid var(--nav-border)',
     padding: '0',
   },
   container: {
@@ -77,7 +90,7 @@ const styles = {
   },
   logo: {
     textDecoration: 'none',
-    color: '#fff',
+    color: 'var(--text)',
     fontSize: '1.3rem',
     fontFamily: '"Playfair Display", Georgia, serif',
     fontWeight: 700,
@@ -87,14 +100,14 @@ const styles = {
     gap: '8px',
   },
   logoIcon: { color: '#FFD700', fontSize: '0.9rem' },
-  logoAccent: { color: '#FFD700' },
+  logoAccent: { color: 'var(--accent)' },
   links: {
     display: 'flex',
     alignItems: 'center',
     gap: '1.5rem',
   },
   link: {
-    color: 'rgba(255,255,255,0.75)',
+    color: 'var(--text-muted)',
     textDecoration: 'none',
     fontSize: '0.9rem',
     letterSpacing: '0.05em',
@@ -102,14 +115,14 @@ const styles = {
     transition: 'color 0.2s',
   },
   userName: {
-    color: '#FFD700',
+    color: 'var(--accent)',
     fontSize: '0.9rem',
     fontFamily: 'system-ui, sans-serif',
   },
   btnLogout: {
     background: 'none',
-    border: '1px solid rgba(255,255,255,0.2)',
-    color: 'rgba(255,255,255,0.6)',
+    border: '1px solid var(--border-2)',
+    color: 'var(--text-subtle)',
     padding: '6px 14px',
     borderRadius: '4px',
     cursor: 'pointer',
@@ -117,7 +130,7 @@ const styles = {
     transition: 'all 0.2s',
   },
   btnRegister: {
-    background: '#FFD700',
+    background: 'var(--accent)',
     color: '#000',
     padding: '7px 16px',
     borderRadius: '4px',
@@ -128,11 +141,24 @@ const styles = {
   },
   cartBtn: {
     position: 'relative',
-    color: '#fff',
+    color: 'var(--text)',
     textDecoration: 'none',
     fontSize: '1.3rem',
     display: 'flex',
     alignItems: 'center',
+  },
+  themeBtn: {
+    width: '36px',
+    height: '36px',
+    borderRadius: '10px',
+    border: '0px solid var(--border)',
+    background: 'var(--surface-3)',
+    color: 'var(--text)',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '1rem',
   },
   iconBtn: {
     position: 'relative',
@@ -152,7 +178,7 @@ const styles = {
     position: 'absolute',
     top: '-8px',
     right: '-10px',
-    background: '#FFD700',
+    background: 'var(--accent)',
     color: '#000',
     fontSize: '0.7rem',
     fontWeight: 700,

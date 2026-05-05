@@ -71,7 +71,7 @@ export default function Home() {
       </section>
 
       {/* FEATURES */}
-      <section style={{ ...styles.section, background: 'rgba(255,255,255,0.02)' }}>
+      <section style={{ ...styles.section, background: 'var(--surface-3)' }}>
         <div style={styles.container}>
           <p style={styles.sectionEyebrow}>Pourquoi nous choisir</p>
           <h2 style={styles.sectionTitle}>L'expérience LuxeShop</h2>
@@ -110,11 +110,11 @@ export default function Home() {
 
 const styles = {
   page: {
-    background: '#09090f',
+    background: 'var(--bg)',
     minHeight: '100vh',
     width: '100%',
     overflowX: 'hidden',
-    color: '#fff',
+    color: 'var(--text)',
     fontFamily: 'system-ui, sans-serif',
   },
   hero: {
@@ -163,7 +163,7 @@ const styles = {
   heroStats: { display: 'flex', gap: '3rem', flexWrap: 'wrap' },
   stat: { display: 'flex', flexDirection: 'column', gap: '4px' },
   statVal: { fontSize: '1.8rem', fontWeight: 800, color: '#FFD700', fontFamily: '"Playfair Display", serif' },
-  statLabel: { color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', letterSpacing: '0.1em' },
+  statLabel: { color: 'var(--text-subtle)', fontSize: '0.8rem', letterSpacing: '0.1em' },
   section: { padding: '5rem 2rem' },
   container: { maxWidth: '1280px', margin: '0 auto' },
   sectionEyebrow: { color: '#FFD700', fontSize: '0.75rem', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '0.75rem' },
@@ -171,22 +171,22 @@ const styles = {
   catGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' },
   catCard: {
     display: 'flex', alignItems: 'center', gap: '1rem',
-    padding: '1.5rem', borderRadius: '12px', textDecoration: 'none', color: '#fff',
+    padding: '1.5rem', borderRadius: '12px', textDecoration: 'none', color: 'var(--text)',
   },
   catIcon: { width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   catName: { flex: 1, fontWeight: 600, fontSize: '1rem' },
-  catArrow: { color: 'rgba(255,255,255,0.3)', fontSize: '1.1rem' },
+  catArrow: { color: 'var(--text-faint)', fontSize: '1.1rem' },
   featGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' },
   featCard: {
-    background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)',
+    background: 'var(--surface)', border: '1px solid var(--border)',
     borderRadius: '12px', padding: '2rem',
   },
   featIcon: { width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' },
   featTitle: { fontSize: '1rem', fontWeight: 700, marginBottom: '0.6rem' },
-  featDesc: { color: 'rgba(255,255,255,0.45)', fontSize: '0.88rem', lineHeight: 1.6 },
+  featDesc: { color: 'var(--text-subtle)', fontSize: '0.88rem', lineHeight: 1.6 },
   banner: {
     padding: '5rem 2rem', position: 'relative', overflow: 'hidden',
-    background: 'linear-gradient(135deg, #1a1400 0%, #09090f 100%)',
+    background: 'linear-gradient(135deg, rgba(255,215,0,0.12) 0%, var(--bg) 100%)',
     borderTop: '1px solid rgba(255,215,0,0.1)',
   },
   bannerGlow: {
@@ -196,5 +196,5 @@ const styles = {
   },
   bannerInner: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem', position: 'relative', zIndex: 1 },
   bannerTitle: { fontSize: '2rem', fontFamily: '"Playfair Display", serif', marginBottom: '0.5rem' },
-  bannerSub: { color: 'rgba(255,255,255,0.45)', fontSize: '0.95rem' },
+  bannerSub: { color: 'var(--text-subtle)', fontSize: '0.95rem' },
 };

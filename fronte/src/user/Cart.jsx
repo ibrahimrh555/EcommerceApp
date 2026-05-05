@@ -279,25 +279,25 @@ export default function Cart() {
 }
 
 const s = {
-  page: { background: '#09090f', minHeight: '100vh', color: '#fff', fontFamily: 'system-ui, sans-serif' },
+  page: { background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)', fontFamily: 'system-ui, sans-serif' },
   emptyCart: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70vh', gap: '1rem', textAlign: 'center' },
   emptyTitle: { fontSize: '1.8rem', fontFamily: '"Playfair Display", Georgia, serif' },
-  emptySub: { color: 'rgba(255,255,255,0.5)' },
+  emptySub: { color: 'var(--text-subtle)' },
   shopLink: { padding: '12px 28px', background: '#FFD700', color: '#000', borderRadius: '8px', textDecoration: 'none', fontWeight: 700 },
   container: { maxWidth: '1280px', margin: '0 auto', padding: '2.5rem 2rem' },
   title: { fontSize: '1.8rem', fontFamily: '"Playfair Display", Georgia, serif', marginBottom: '2rem' },
-  count: { fontSize: '1rem', color: 'rgba(255,255,255,0.4)', fontFamily: 'system-ui, sans-serif', fontWeight: 400 },
+  count: { fontSize: '1rem', color: 'var(--text-subtle)', fontFamily: 'system-ui, sans-serif', fontWeight: 400 },
 
   // Stepper
   steps: { display: 'flex', alignItems: 'center', marginBottom: '2.5rem' },
   step: { display: 'flex', alignItems: 'center', gap: '8px', opacity: 0.35, transition: 'opacity 0.2s' },
   stepActive: { opacity: 1 },
   stepDone: { opacity: 0.7 },
-  stepNum: { width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.8rem', flexShrink: 0 },
+  stepNum: { width: '28px', height: '28px', borderRadius: '50%', background: 'var(--surface-2)', color: 'var(--text-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.8rem', flexShrink: 0 },
   stepNumActive: { background: '#FFD700', color: '#000' },
   stepNumDone: { background: '#4CAF50', color: '#fff' },
   stepLabel: { fontSize: '0.85rem', fontWeight: 600, whiteSpace: 'nowrap' },
-  stepLine: { flex: 1, height: '2px', background: 'rgba(255,255,255,0.08)', margin: '0 12px', transition: 'background 0.3s' },
+  stepLine: { flex: 1, height: '2px', background: 'var(--border)', margin: '0 12px', transition: 'background 0.3s' },
   stepLineDone: { background: '#4CAF50' },
 
   // Layout
@@ -305,55 +305,55 @@ const s = {
   left: { display: 'flex', flexDirection: 'column', gap: '1rem' },
 
   // Cart items
-  item: { display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '1rem' },
+  item: { display: 'flex', alignItems: 'center', gap: '1rem', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '10px', padding: '1rem' },
   itemImg: { width: '70px', height: '70px', objectFit: 'cover', borderRadius: '8px' },
   itemInfo: { flex: 1 },
   itemName: { fontWeight: 600, marginBottom: '4px' },
-  itemUnit: { color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem' },
-  qtyControl: { display: 'flex', alignItems: 'center', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', overflow: 'hidden' },
-  qtyBtn: { background: 'rgba(255,255,255,0.06)', border: 'none', color: '#fff', width: '34px', height: '34px', cursor: 'pointer', fontSize: '1.1rem' },
+  itemUnit: { color: 'var(--text-subtle)', fontSize: '0.85rem' },
+  qtyControl: { display: 'flex', alignItems: 'center', border: '1px solid var(--border-2)', borderRadius: '6px', overflow: 'hidden' },
+  qtyBtn: { background: 'var(--surface-2)', border: 'none', color: 'var(--text)', width: '34px', height: '34px', cursor: 'pointer', fontSize: '1.1rem' },
   qtyNum: { width: '34px', textAlign: 'center', fontSize: '0.95rem' },
   itemTotal: { fontWeight: 700, color: '#FFD700', minWidth: '80px', textAlign: 'right' },
-  removeBtn: { background: 'none', border: 'none', color: 'rgba(255,255,255,0.3)', cursor: 'pointer', fontSize: '1rem', padding: '4px 8px' },
+  removeBtn: { background: 'none', border: 'none', color: 'var(--text-faint)', cursor: 'pointer', fontSize: '1rem', padding: '4px 8px' },
 
   // Cards
-  card: { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1.75rem' },
+  card: { background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.75rem' },
   cardTitle: { fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem' },
 
   // Shipping form
   formGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' },
   fieldGroup: {},
-  label: { display: 'block', color: 'rgba(255,255,255,0.5)', fontSize: '0.82rem', marginBottom: '6px' },
-  input: { width: '100%', padding: '11px 14px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' },
+  label: { display: 'block', color: 'var(--text-subtle)', fontSize: '0.82rem', marginBottom: '6px' },
+  input: { width: '100%', padding: '11px 14px', background: 'var(--surface-2)', border: '1px solid var(--border-2)', borderRadius: '8px', color: 'var(--text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' },
 
   // Payment methods
   methodGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' },
-  methodBtn: { padding: '1.25rem', background: 'rgba(255,255,255,0.04)', border: '2px solid rgba(255,255,255,0.08)', borderRadius: '12px', cursor: 'pointer', textAlign: 'left', color: '#fff', transition: 'all 0.2s', position: 'relative' },
+  methodBtn: { padding: '1.25rem', background: 'var(--surface)', border: '2px solid var(--border)', borderRadius: '12px', cursor: 'pointer', textAlign: 'left', color: 'var(--text)', transition: 'all 0.2s', position: 'relative' },
   methodBtnActive: { border: '2px solid #FFD700', background: 'rgba(255,215,0,0.06)' },
   methodIcon: { fontSize: '1.8rem', marginBottom: '0.75rem' },
   methodName: { fontWeight: 700, fontSize: '0.95rem', marginBottom: '4px' },
-  methodSub: { color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', lineHeight: 1.4, marginBottom: '0.75rem' },
+  methodSub: { color: 'var(--text-subtle)', fontSize: '0.78rem', lineHeight: 1.4, marginBottom: '0.75rem' },
   cardLogos: { display: 'flex', gap: '6px' },
-  cardLogo: { padding: '2px 8px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px', fontSize: '0.65rem', fontWeight: 800, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.05em' },
+  cardLogo: { padding: '2px 8px', background: 'var(--surface-2)', border: '1px solid var(--border-2)', borderRadius: '4px', fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-faint)', letterSpacing: '0.05em' },
   cardLogoActive: { border: '1px solid rgba(255,215,0,0.3)', color: '#FFD700', background: 'rgba(255,215,0,0.08)' },
   selectedCheck: { position: 'absolute', top: '10px', right: '12px', color: '#FFD700', fontSize: '0.75rem', fontWeight: 700 },
 
   // Recap
-  recap: { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '10px', padding: '1.25rem' },
-  recapTitle: { fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)', marginBottom: '1rem', letterSpacing: '0.05em' },
+  recap: { background: 'var(--surface-3)', border: '1px solid var(--border)', borderRadius: '10px', padding: '1.25rem' },
+  recapTitle: { fontSize: '0.85rem', color: 'var(--text-subtle)', marginBottom: '1rem', letterSpacing: '0.05em' },
   recapItem: { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.6rem' },
   recapImg: { width: '36px', height: '36px', objectFit: 'cover', borderRadius: '6px' },
-  recapAddr: { marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.4)', fontSize: '0.82rem' },
+  recapAddr: { marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border)', color: 'var(--text-subtle)', fontSize: '0.82rem', display: 'flex', alignItems: 'center' },
 
   // Summary sidebar
-  summary: { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1.75rem', position: 'sticky', top: '80px' },
+  summary: { background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.75rem', position: 'sticky', top: '80px' },
   summaryTitle: { fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.25rem' },
-  summaryRow: { display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', color: 'rgba(255,255,255,0.65)', fontSize: '0.95rem' },
+  summaryRow: { display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', color: 'var(--text-muted)', fontSize: '0.95rem' },
   totalRow: { color: '#FFD700', fontSize: '1.15rem', fontWeight: 800 },
   freeHint: { fontSize: '0.75rem', color: '#4CAF50', marginBottom: '0.75rem' },
-  divider: { height: '1px', background: 'rgba(255,255,255,0.08)', margin: '1rem 0' },
+  divider: { height: '1px', background: 'var(--border)', margin: '1rem 0' },
   checkoutBtn: { width: '100%', padding: '14px', background: '#FFD700', color: '#000', border: 'none', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', marginTop: '1rem' },
-  backBtn: { width: '100%', padding: '11px', background: 'transparent', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '8px', cursor: 'pointer', fontSize: '0.9rem', marginTop: '0.75rem' },
+  backBtn: { width: '100%', padding: '11px', background: 'transparent', color: 'var(--text-subtle)', border: '1px solid var(--border-2)', borderRadius: '8px', cursor: 'pointer', fontSize: '0.9rem', marginTop: '0.75rem' },
   securityRow: { display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '1.25rem', justifyContent: 'center' },
-  secBadge: { fontSize: '0.68rem', color: 'rgba(255,255,255,0.25)', background: 'rgba(255,255,255,0.04)', padding: '3px 8px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.07)' },
+  secBadge: { fontSize: '0.68rem', color: 'var(--text-faint)', background: 'var(--surface-3)', padding: '3px 8px', borderRadius: '20px', border: '1px solid var(--border)' },
 };

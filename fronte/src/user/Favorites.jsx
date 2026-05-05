@@ -111,13 +111,13 @@ export default function Favorites() {
 }
 
 const s = {
-  page: { background: '#09090f', minHeight: '100vh', color: '#fff', fontFamily: 'system-ui, sans-serif' },
+  page: { background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)', fontFamily: 'system-ui, sans-serif' },
 
   // Empty state
   empty: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70vh', gap: '1.25rem', textAlign: 'center', padding: '2rem' },
   emptyHeart: { fontSize: '5rem', color: 'rgba(255,100,100,0.3)', lineHeight: 1 },
-  emptyTitle: { fontSize: '1.8rem', fontFamily: '"Playfair Display", Georgia, serif', color: '#fff' },
-  emptySub: { color: 'rgba(255,255,255,0.4)', maxWidth: '380px', lineHeight: 1.6 },
+  emptyTitle: { fontSize: '1.8rem', fontFamily: '"Playfair Display", Georgia, serif', color: 'var(--text)' },
+  emptySub: { color: 'var(--text-subtle)', maxWidth: '380px', lineHeight: 1.6 },
   browseBtn: { padding: '13px 28px', background: '#FFD700', color: '#000', borderRadius: '8px', textDecoration: 'none', fontWeight: 700, fontSize: '0.95rem' },
 
   // Page
@@ -125,35 +125,35 @@ const s = {
   header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' },
   eyebrow: { color: '#ff6b6b', fontSize: '0.78rem', letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '0.5rem' },
   title: { fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontFamily: '"Playfair Display", Georgia, serif', fontWeight: 900, marginBottom: '0.3rem' },
-  sub: { color: 'rgba(255,255,255,0.4)', fontSize: '0.88rem' },
+  sub: { color: 'var(--text-subtle)', fontSize: '0.88rem' },
   clearBtn: { padding: '9px 18px', background: 'rgba(220,50,50,0.1)', border: '1px solid rgba(220,50,50,0.25)', color: '#ff6b6b', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem' },
 
   // Grid
   grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '3rem' },
 
   // Card
-  card: { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', overflow: 'hidden', display: 'flex', flexDirection: 'column', transition: 'border-color 0.2s, transform 0.2s' },
+  card: { background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '14px', overflow: 'hidden', display: 'flex', flexDirection: 'column', transition: 'border-color 0.2s, transform 0.2s' },
   imageLink: { display: 'block' },
-  imageWrap: { position: 'relative', paddingBottom: '60%', overflow: 'hidden', background: '#1a1a2e' },
+  imageWrap: { position: 'relative', paddingBottom: '60%', overflow: 'hidden', background: 'var(--image-bg)' },
   img: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s' },
   catBadge: { position: 'absolute', top: '10px', left: '10px', background: 'rgba(0,0,0,0.7)', color: '#FFD700', padding: '3px 10px', borderRadius: '20px', fontSize: '0.7rem', letterSpacing: '0.04em' },
   outBadge: { position: 'absolute', top: '10px', right: '10px', background: 'rgba(220,50,50,0.85)', color: '#fff', padding: '3px 10px', borderRadius: '20px', fontSize: '0.7rem' },
 
   body: { padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.6rem', flex: 1 },
-  name: { fontSize: '1rem', fontWeight: 700, lineHeight: 1.3, color: '#fff' },
+  name: { fontSize: '1rem', fontWeight: 700, lineHeight: 1.3, color: 'var(--text)' },
   ratingRow: { display: 'flex', alignItems: 'center', gap: '6px' },
   stars: { color: '#FFD700', fontSize: '0.78rem' },
-  reviews: { color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem' },
-  desc: { color: 'rgba(255,255,255,0.45)', fontSize: '0.82rem', lineHeight: 1.5, flex: 1 },
+  reviews: { color: 'var(--text-faint)', fontSize: '0.75rem' },
+  desc: { color: 'var(--text-subtle)', fontSize: '0.82rem', lineHeight: 1.5, flex: 1 },
 
-  footer: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', paddingTop: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.06)' },
+  footer: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', paddingTop: '0.75rem', borderTop: '1px solid var(--border)' },
   price: { fontSize: '1.2rem', fontWeight: 800, color: '#FFD700' },
   actions: { display: 'flex', gap: '6px', alignItems: 'center' },
   cartBtn: { width: '34px', height: '34px', background: '#FFD700', color: '#000', border: 'none', borderRadius: '6px', fontWeight: 700, cursor: 'pointer', fontSize: '0.82rem' },
-  cartBtnDisabled: { background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.3)', cursor: 'not-allowed' },
+  cartBtnDisabled: { background: 'var(--surface-3)', color: 'var(--text-faint)', cursor: 'not-allowed' },
   heartBtn: { width: '34px', height: '34px', background: 'rgba(220,50,50,0.15)', border: '1px solid rgba(220,50,50,0.3)', color: '#ff6b6b', borderRadius: '6px', cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' },
 
   // CTA bottom
-  cta: { borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '2rem', textAlign: 'center' },
-  ctaLink: { color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '0.9rem' },
+  cta: { borderTop: '1px solid var(--border)', paddingTop: '2rem', textAlign: 'center' },
+  ctaLink: { color: 'var(--text-subtle)', textDecoration: 'none', fontSize: '0.9rem' },
 };
