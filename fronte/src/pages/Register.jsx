@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { Gem } from 'lucide-react';
 
 export default function Register() {
   const { login } = useAuth();
@@ -33,7 +34,7 @@ export default function Register() {
     <div style={styles.page}>
       <div style={styles.card}>
         <div style={styles.logoSection}>
-          <span style={styles.logoIcon}>◆</span>
+          <Gem size={18} color="#FFD700" aria-hidden="true" />
           <h1 style={styles.title}>LUXE<span style={styles.accent}>SHOP</span></h1>
         </div>
         <h2 style={styles.subtitle}>Créer un compte</h2>

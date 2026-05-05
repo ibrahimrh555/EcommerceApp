@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAdmin } from '../context/AdminContext';
+import { Boxes, Gem, LayoutDashboard, LogOut, ShoppingCart, Users } from 'lucide-react';
 
 const NAV = [
-  { to: '/admin/dashboard', icon: '▦', label: 'Dashboard' },
-  { to: '/admin/products', icon: '◈', label: 'Produits' },
-  { to: '/admin/orders', icon: '◉', label: 'Commandes' },
-  { to: '/admin/users', icon: '◎', label: 'Utilisateurs' },
+  { to: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+  { to: '/admin/products', icon: Boxes, label: 'Produits' },
+  { to: '/admin/orders', icon: ShoppingCart, label: 'Commandes' },
+  { to: '/admin/users', icon: Users, label: 'Utilisateurs' },
 ];
 
 export default function Sidebar({ open }) {
@@ -15,20 +16,22 @@ export default function Sidebar({ open }) {
 
   const handleLogout = () => {
     logoutAdmin();
-    navigate('/admin/login');
+    navigate('/login');
   };
 
   return (
     <aside style={{ ...styles.sidebar, width: open ? '240px' : '64px' }}>
       {/* Logo */}
       <div style={styles.logo}>
-        <span style={styles.logoIcon}>◆</span>
+        <Gem size={18} color="#FFD700" aria-hidden="true" />
         {open && <span style={styles.logoText}>LUXE<span style={styles.logoAccent}>ADMIN</span></span>}
       </div>
 
       {/* Nav */}
       <nav style={styles.nav}>
-        {NAV.map(item => (
+        {NAV.map(item => {
+          const Icon = item.icon;
+          return (
           <NavLink
             key={item.to}
             to={item.to}
@@ -37,10 +40,11 @@ export default function Sidebar({ open }) {
               ...(isActive ? styles.navActive : {}),
             })}
           >
-            <span style={styles.navIcon}>{item.icon}</span>
+            <span style={styles.navIcon}><Icon size={18} aria-hidden="true" /></span>
             {open && <span style={styles.navLabel}>{item.label}</span>}
           </NavLink>
-        ))}
+          );
+        })}
       </nav>
 
       {/* Bottom */}
@@ -55,7 +59,7 @@ export default function Sidebar({ open }) {
           </div>
         )}
         <button onClick={handleLogout} style={styles.logoutBtn} title="Déconnexion">
-          <span style={{ fontSize: '1.1rem' }}>⎋</span>
+          <LogOut size={18} aria-hidden="true" />
           {open && <span style={{ marginLeft: '8px', fontSize: '0.85rem' }}>Déconnexion</span>}
         </button>
       </div>

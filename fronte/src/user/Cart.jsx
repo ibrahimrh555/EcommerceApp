@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { ArrowLeft, Check, MapPin, ShoppingCart, X as XIcon } from 'lucide-react';
 
 export default function Cart() {
   const { cart, removeFromCart, updateQty, clearCart, totalItems, totalPrice } = useCart();
@@ -41,7 +42,7 @@ export default function Cart() {
         paymentMethod: 'Cash on Delivery',
       });
       clearCart();
-      toast.success('Commande passée avec succès ! 🎉');
+      toast.success('Commande passée avec succès !');
       navigate(`/orders/${data._id}`);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Erreur');
@@ -54,7 +55,7 @@ export default function Cart() {
     return (
       <div style={styles.page}>
         <div style={styles.emptyCart}>
-          <span style={{ fontSize: '5rem' }}>🛒</span>
+          <ShoppingCart size={84} aria-hidden="true" />
           <h2 style={styles.emptyTitle}>Votre panier est vide</h2>
           <p style={styles.emptySub}>Découvrez notre catalogue pour trouver vos produits préférés.</p>
           <Link to="/" style={styles.shopLink}>Commencer mes achats</Link>
@@ -97,7 +98,9 @@ export default function Cart() {
                   <button onClick={() => updateQty(item.product, Math.min(item.stock, item.quantity + 1))} style={styles.qtyBtn}>+</button>
                 </div>
                 <p style={styles.itemTotal}>{(item.price * item.quantity).toFixed(2)} €</p>
-                <button onClick={() => removeFromCart(item.product)} style={styles.removeBtn}>✕</button>
+                <button onClick={() => removeFromCart(item.product)} style={styles.removeBtn} aria-label="Retirer du panier">
+                  <XIcon size={16} aria-hidden="true" />
+                </button>
               </div>
             ))}
 
@@ -130,7 +133,8 @@ export default function Cart() {
                 ))}
                 <div style={styles.divider}></div>
                 <p style={styles.addressPreview}>
-                  📍 {shipping.street}, {shipping.city} {shipping.postalCode}, {shipping.country}
+                  <MapPin size={16} style={{ marginRight: '8px', verticalAlign: 'middle' }} aria-hidden="true" />
+                  {shipping.street}, {shipping.city} {shipping.postalCode}, {shipping.country}
                 </p>
               </div>
             )}
@@ -158,15 +162,23 @@ export default function Cart() {
             {step === 'shipping' && (
               <>
                 <button onClick={() => setStep('confirm')} style={styles.checkoutBtn}>Continuer →</button>
-                <button onClick={() => setStep('cart')} style={styles.backBtn}>← Retour</button>
+                <button onClick={() => setStep('cart')} style={styles.backBtn}>
+                  <ArrowLeft size={16} style={{ marginRight: '8px', verticalAlign: 'middle' }} aria-hidden="true" />
+                  Retour
+                </button>
               </>
             )}
             {step === 'confirm' && (
               <>
                 <button onClick={handlePlaceOrder} disabled={placing} style={styles.checkoutBtn}>
-                  {placing ? 'Traitement...' : '✓ Passer la commande'}
+                  {placing ? 'Traitement...' : (
+                    <><Check size={16} style={{ marginRight: '8px', verticalAlign: 'middle' }} aria-hidden="true" />Passer la commande</>
+                  )}
                 </button>
-                <button onClick={() => setStep('shipping')} style={styles.backBtn}>← Modifier</button>
+                <button onClick={() => setStep('shipping')} style={styles.backBtn}>
+                  <ArrowLeft size={16} style={{ marginRight: '8px', verticalAlign: 'middle' }} aria-hidden="true" />
+                  Modifier
+                </button>
               </>
             )}
           </div>

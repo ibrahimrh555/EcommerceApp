@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Dumbbell, Home as HomeIcon, Laptop, Lock, RotateCcw, Shirt, Star, Truck } from 'lucide-react';
 
 const FEATURES = [
-  { icon: '🚚', title: 'Livraison gratuite', desc: "Dès 100€ d'achat, livraison offerte partout en France." },
-  { icon: '↩️', title: 'Retours faciles', desc: '30 jours pour changer d\'avis, sans frais.' },
-  { icon: '🔒', title: 'Paiement sécurisé', desc: 'Vos données bancaires sont protégées à 100%.' },
-  { icon: '⭐', title: 'Qualité garantie', desc: 'Chaque produit est soigneusement sélectionné.' },
+  { icon: Truck, title: 'Livraison gratuite', desc: "Dès 100€ d'achat, livraison offerte partout en Maroc." },
+  { icon: RotateCcw, title: 'Retours faciles', desc: '30 jours pour changer d\'avis, sans frais.' },
+  { icon: Lock, title: 'Paiement sécurisé', desc: 'Vos données bancaires sont protégées à 100%.' },
+  { icon: Star, title: 'Qualité garantie', desc: 'Chaque produit est soigneusement sélectionné.' },
 ];
 
 const CATEGORIES = [
-  { name: 'Electronics', icon: '💻', color: 'rgba(33,150,243,0.15)', border: 'rgba(33,150,243,0.3)' },
-  { name: 'Fashion', icon: '👗', color: 'rgba(233,30,99,0.15)', border: 'rgba(233,30,99,0.3)' },
-  { name: 'Home & Kitchen', icon: '🏠', color: 'rgba(76,175,80,0.15)', border: 'rgba(76,175,80,0.3)' },
-  { name: 'Sports', icon: '🏋️', color: 'rgba(255,152,0,0.15)', border: 'rgba(255,152,0,0.3)' },
+  { name: 'Electronics', icon: Laptop, color: 'rgba(33,150,243,0.15)', border: 'rgba(33,150,243,0.3)' },
+  { name: 'Fashion', icon: Shirt, color: 'rgba(233,30,99,0.15)', border: 'rgba(233,30,99,0.3)' },
+  { name: 'Home & Kitchen', icon: HomeIcon, color: 'rgba(76,175,80,0.15)', border: 'rgba(76,175,80,0.3)' },
+  { name: 'Sports', icon: Dumbbell, color: 'rgba(255,152,0,0.15)', border: 'rgba(255,152,0,0.3)' },
 ];
 
 export default function Home() {
@@ -32,7 +33,7 @@ export default function Home() {
           </p>
           <div style={styles.heroCta}>
             <Link to="/catalogue" style={styles.btnPrimary}>Découvrir le catalogue →</Link>
-            <Link to="/catalogue" style={styles.btnSecondary}>Nouveautés</Link>
+            <Link to="/login" style={styles.btnSecondary}>Se connecter</Link>
           </div>
           <div style={styles.heroStats}>
             {[['500+', 'Produits'], ['4.8★', 'Note moyenne'], ['12k+', 'Clients']].map(([val, label]) => (
@@ -51,17 +52,20 @@ export default function Home() {
           <p style={styles.sectionEyebrow}>Parcourir par</p>
           <h2 style={styles.sectionTitle}>Nos Catégories</h2>
           <div style={styles.catGrid}>
-            {CATEGORIES.map(cat => (
-              <Link
-                key={cat.name}
-                to={"/catalogue?category=" + cat.name}
-                style={{ ...styles.catCard, background: cat.color, border: "1px solid " + cat.border }}
-              >
-                <span style={styles.catIcon}>{cat.icon}</span>
-                <span style={styles.catName}>{cat.name}</span>
-                <span style={styles.catArrow}>→</span>
-              </Link>
-            ))}
+            {CATEGORIES.map(cat => {
+              const Icon = cat.icon;
+              return (
+                <Link
+                  key={cat.name}
+                  to={"/catalogue?category=" + cat.name}
+                  style={{ ...styles.catCard, background: cat.color, border: "1px solid " + cat.border }}
+                >
+                  <span style={styles.catIcon}><Icon size={32} aria-hidden="true" /></span>
+                  <span style={styles.catName}>{cat.name}</span>
+                  <span style={styles.catArrow}>→</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -72,13 +76,16 @@ export default function Home() {
           <p style={styles.sectionEyebrow}>Pourquoi nous choisir</p>
           <h2 style={styles.sectionTitle}>L'expérience LuxeShop</h2>
           <div style={styles.featGrid}>
-            {FEATURES.map(f => (
-              <div key={f.title} style={styles.featCard}>
-                <span style={styles.featIcon}>{f.icon}</span>
-                <h3 style={styles.featTitle}>{f.title}</h3>
-                <p style={styles.featDesc}>{f.desc}</p>
-              </div>
-            ))}
+            {FEATURES.map(f => {
+              const Icon = f.icon;
+              return (
+                <div key={f.title} style={styles.featCard}>
+                  <span style={styles.featIcon}><Icon size={32} aria-hidden="true" /></span>
+                  <h3 style={styles.featTitle}>{f.title}</h3>
+                  <p style={styles.featDesc}>{f.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -102,7 +109,14 @@ export default function Home() {
 }
 
 const styles = {
-  page: { background: '#09090f', minHeight: '100vh', color: '#fff', fontFamily: 'system-ui, sans-serif' },
+  page: {
+    background: '#09090f',
+    minHeight: '100vh',
+    width: '100%',
+    overflowX: 'hidden',
+    color: '#fff',
+    fontFamily: 'system-ui, sans-serif',
+  },
   hero: {
     position: 'relative',
     overflow: 'hidden',
@@ -154,20 +168,20 @@ const styles = {
   container: { maxWidth: '1280px', margin: '0 auto' },
   sectionEyebrow: { color: '#FFD700', fontSize: '0.75rem', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '0.75rem' },
   sectionTitle: { fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontFamily: '"Playfair Display", Georgia, serif', marginBottom: '2.5rem' },
-  catGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' },
+  catGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' },
   catCard: {
     display: 'flex', alignItems: 'center', gap: '1rem',
     padding: '1.5rem', borderRadius: '12px', textDecoration: 'none', color: '#fff',
   },
-  catIcon: { fontSize: '2rem' },
+  catIcon: { width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   catName: { flex: 1, fontWeight: 600, fontSize: '1rem' },
   catArrow: { color: 'rgba(255,255,255,0.3)', fontSize: '1.1rem' },
-  featGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1.5rem' },
+  featGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' },
   featCard: {
     background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)',
     borderRadius: '12px', padding: '2rem',
   },
-  featIcon: { fontSize: '2rem', display: 'block', marginBottom: '1rem' },
+  featIcon: { width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' },
   featTitle: { fontSize: '1rem', fontWeight: 700, marginBottom: '0.6rem' },
   featDesc: { color: 'rgba(255,255,255,0.45)', fontSize: '0.88rem', lineHeight: 1.6 },
   banner: {

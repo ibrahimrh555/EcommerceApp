@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { Package } from 'lucide-react';
 
 const STATUS_COLORS = {
   pending: '#FF9800',
@@ -45,7 +46,7 @@ export default function Orders() {
         <h1 style={styles.title}>Mes Commandes</h1>
         {orders.length === 0 ? (
           <div style={styles.empty}>
-            <span style={{ fontSize: '3rem' }}>📦</span>
+            <Package size={52} aria-hidden="true" />
             <p>Vous n'avez pas encore de commandes.</p>
             <Link to="/" style={styles.shopLink}>Commencer mes achats</Link>
           </div>

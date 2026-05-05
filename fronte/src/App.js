@@ -6,20 +6,20 @@ import { CartProvider } from './context/CartContext';
 import { AdminProvider } from './context/AdminContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import ProductList from './filtres/ProductList';
-import ProductPage from './filtres/ProductPage';
-import Cart from './filtres/Cart';
-import Login from './filtres/Login';
-import Register from './filtres/Register';
-import Orders from './filtres/Orders';
-import OrderDetail from './filtres/OrderDetail';
+import ProductList from './user/ProductList';
+import ProductPage from './user/ProductPage';
+import Cart from './user/Cart';
+import Products from './user/Products';
+import Login from './pages/Login';          // ← unique page login
+import Register from './pages/Register';
+import Orders from './user/Orders';
+import OrderDetail from './user/OrderDetail';
 import AdminRoute from './components/AdminRoute';
 import AdminLayout from './components/AdminLayout';
-import AdminLogin from './pages/AdminLogin';
-import Dashboard from './pages/Dashboard';
-import AdminProducts from './pages/Products';
-import AdminOrders from './pages/Orders';
-import AdminUsers from './pages/Users';
+import Dashboard from './admin/Dashboard';
+import AdminProducts from './admin/Products';
+import AdminOrders from './admin/Orders';
+import AdminUsers from './admin/Users';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -42,8 +42,7 @@ function App() {
             `}</style>
             <Routes>
 
-              {/* ── ADMIN routes (own layout, no shop Navbar) ── */}
-              <Route path="/admin/login" element={<AdminLogin />} />
+              {/* ── ADMIN routes (own layout, no Navbar) ── */}
               <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
                 <Route index element={<Navigate to="/admin/dashboard" replace />} />
                 <Route path="dashboard" element={<Dashboard />} />

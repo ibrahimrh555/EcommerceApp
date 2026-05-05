@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { ArrowLeft } from 'lucide-react';
 
 const STATUS_STEPS = ['pending', 'processing', 'shipped', 'delivered'];
 const STATUS_LABELS = { pending: 'En attente', processing: 'En traitement', shipped: 'Expédié', delivered: 'Livré', cancelled: 'Annulé' };
@@ -35,7 +36,10 @@ export default function OrderDetail() {
   return (
     <div style={styles.page}>
       <div style={styles.container}>
-        <button onClick={() => navigate('/orders')} style={styles.back}>← Mes commandes</button>
+        <button onClick={() => navigate('/orders')} style={styles.back}>
+          <ArrowLeft size={16} style={{ marginRight: '8px', verticalAlign: 'middle' }} aria-hidden="true" />
+          Mes commandes
+        </button>
 
         <div style={styles.header}>
           <div>

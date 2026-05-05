@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Boxes, ShoppingCart, Users, Wallet } from 'lucide-react';
 
 const STATUS_COLORS = {
   pending: '#FF9800', processing: '#2196F3',
@@ -24,10 +25,10 @@ export default function Dashboard() {
   if (loading) return <Loader />;
 
   const cards = [
-    { label: 'Utilisateurs', value: stats.totalUsers, icon: '👤', color: '#2196F3' },
-    { label: 'Produits', value: stats.totalProducts, icon: '📦', color: '#9C27B0' },
-    { label: 'Commandes', value: stats.totalOrders, icon: '🛒', color: '#FF9800' },
-    { label: 'Revenus', value: `${stats.revenue?.toFixed(2)} €`, icon: '💰', color: '#4CAF50' },
+    { label: 'Utilisateurs', value: stats.totalUsers, icon: Users, color: '#2196F3' },
+    { label: 'Produits', value: stats.totalProducts, icon: Boxes, color: '#9C27B0' },
+    { label: 'Commandes', value: stats.totalOrders, icon: ShoppingCart, color: '#FF9800' },
+    { label: 'Revenus', value: `${stats.revenue?.toFixed(2)} €`, icon: Wallet, color: '#4CAF50' },
   ];
 
   return (
@@ -43,7 +44,14 @@ export default function Dashboard() {
           <div key={c.label} style={{ ...styles.statCard, borderTop: `3px solid ${c.color}` }}>
             <div style={styles.statTop}>
               <span style={styles.statLabel}>{c.label}</span>
-              <span style={{ ...styles.statIconBg, background: `${c.color}20` }}>{c.icon}</span>
+              {(() => {
+                const Icon = c.icon;
+                return (
+                  <span style={{ ...styles.statIconBg, background: `${c.color}20`, color: c.color }}>
+                    <Icon size={18} aria-hidden="true" />
+                  </span>
+                );
+              })()}
             </div>
             <p style={{ ...styles.statValue, color: c.color }}>{c.value}</p>
           </div>
@@ -117,7 +125,7 @@ const styles = {
   },
   statTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' },
   statLabel: { color: 'rgba(255,255,255,0.5)', fontSize: '0.82rem', letterSpacing: '0.05em' },
-  statIconBg: { width: '36px', height: '36px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' },
+  statIconBg: { width: '36px', height: '36px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   statValue: { fontSize: '2rem', fontWeight: 800 },
   row: { display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'flex-start' },
   section: {

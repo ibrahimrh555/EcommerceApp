@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { Gem, ShoppingCart } from 'lucide-react';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -18,7 +19,7 @@ export default function Navbar() {
     <nav style={styles.nav}>
       <div style={styles.container}>
         <Link to="/" style={styles.logo}>
-          <span style={styles.logoIcon}>◆</span>
+          <Gem size={16} color="#FFD700" aria-hidden="true" />
           LUXE<span style={styles.logoAccent}>SHOP</span>
         </Link>
 
@@ -38,7 +39,7 @@ export default function Navbar() {
             </>
           )}
           <Link to="/cart" style={styles.cartBtn}>
-            <span style={styles.cartIcon}>🛒</span>
+            <ShoppingCart size={22} aria-hidden="true" />
             {totalItems > 0 && <span style={styles.badge}>{totalItems}</span>}
           </Link>
         </div>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { ArrowLeft, Check, ShoppingCart, X as XIcon } from 'lucide-react';
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -60,7 +61,10 @@ export default function ProductPage() {
   return (
     <div style={styles.page}>
       <div style={styles.container}>
-        <button onClick={() => navigate(-1)} style={styles.back}>← Retour</button>
+        <button onClick={() => navigate(-1)} style={styles.back}>
+          <ArrowLeft size={16} style={{ marginRight: '8px', verticalAlign: 'middle' }} aria-hidden="true" />
+          Retour
+        </button>
 
         <div style={styles.product}>
           <div style={styles.imageSection}>
@@ -78,7 +82,11 @@ export default function ProductPage() {
 
             <div style={styles.stockRow}>
               <span style={{ ...styles.stockBadge, background: product.stock > 0 ? 'rgba(50,200,100,0.15)' : 'rgba(200,50,50,0.15)', color: product.stock > 0 ? '#4CAF50' : '#f44336' }}>
-                {product.stock > 0 ? `✓ En stock (${product.stock})` : '✗ Rupture de stock'}
+                {product.stock > 0 ? (
+                  <><Check size={14} style={{ marginRight: '6px', verticalAlign: 'middle' }} aria-hidden="true" />En stock ({product.stock})</>
+                ) : (
+                  <><XIcon size={14} style={{ marginRight: '6px', verticalAlign: 'middle' }} aria-hidden="true" />Rupture de stock</>
+                )}
               </span>
             </div>
 
@@ -89,7 +97,10 @@ export default function ProductPage() {
                   <span style={styles.qtyNum}>{qty}</span>
                   <button onClick={() => setQty(q => Math.min(product.stock, q + 1))} style={styles.qtyBtn}>+</button>
                 </div>
-                <button onClick={handleAddToCart} style={styles.addBtn}>Ajouter au panier 🛒</button>
+                <button onClick={handleAddToCart} style={styles.addBtn}>
+                  <ShoppingCart size={18} style={{ marginRight: '10px', verticalAlign: 'middle' }} aria-hidden="true" />
+                  Ajouter au panier
+                </button>
               </div>
             )}
           </div>

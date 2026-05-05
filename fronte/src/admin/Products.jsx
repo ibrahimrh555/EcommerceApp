@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const EMPTY = { name: '', description: '', price: '', category: '', image: '', stock: '' };
 const CATEGORIES = ['Electronics', 'Fashion', 'Home & Kitchen', 'Sports'];
@@ -90,8 +91,8 @@ export default function Products() {
                   <td style={styles.td}><span style={styles.rating}>★ {p.rating?.toFixed(1)}</span></td>
                   <td style={styles.td}>
                     <div style={styles.actions}>
-                      <button onClick={() => openEdit(p)} style={styles.btnEdit}>✏️ Modifier</button>
-                      <button onClick={() => handleDelete(p._id, p.name)} style={styles.btnDelete}>🗑 Supprimer</button>
+                      <button onClick={() => openEdit(p)} style={styles.btnEdit}><Pencil size={14} style={styles.inlineIcon} aria-hidden="true" />Modifier</button>
+                      <button onClick={() => handleDelete(p._id, p.name)} style={styles.btnDelete}><Trash2 size={14} style={styles.inlineIcon} aria-hidden="true" />Supprimer</button>
                     </div>
                   </td>
                 </tr>
@@ -172,6 +173,7 @@ const styles = {
   stock: { fontWeight: 700 },
   rating: { color: '#FF9800', fontSize: '0.85rem' },
   actions: { display: 'flex', gap: '6px', flexWrap: 'wrap' },
+  inlineIcon: { marginRight: '6px', verticalAlign: 'middle' },
   btnEdit: { padding: '5px 12px', background: 'rgba(33,150,243,0.15)', border: '1px solid rgba(33,150,243,0.3)', color: '#64b5f6', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem' },
   btnDelete: { padding: '5px 12px', background: 'rgba(220,50,50,0.12)', border: '1px solid rgba(220,50,50,0.25)', color: '#ff6b6b', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem' },
   overlay: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' },

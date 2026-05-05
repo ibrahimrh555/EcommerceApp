@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import ProductCard from '../components/Productcard';
+import { Search } from 'lucide-react';
 
 const CATEGORIES = ['All', 'Electronics', 'Fashion', 'Home & Kitchen', 'Sports'];
 
@@ -86,7 +87,9 @@ export default function ProductList() {
               onChange={e => setSearch(e.target.value)}
               style={styles.searchInput}
             />
-            <button type="submit" style={styles.searchBtn}>🔍</button>
+            <button type="submit" style={styles.searchBtn} aria-label="Rechercher">
+              <Search size={18} aria-hidden="true" />
+            </button>
           </form>
 
           {/* Sort */}
@@ -122,7 +125,7 @@ export default function ProductList() {
           </div>
         ) : sortedProducts.length === 0 ? (
           <div style={styles.empty}>
-            <span style={{ fontSize: '3.5rem' }}>🔍</span>
+            <Search size={56} aria-hidden="true" />
             <h3 style={styles.emptyTitle}>Aucun produit trouvé</h3>
             <p style={styles.emptySub}>Essayez une autre recherche ou catégorie.</p>
             <button onClick={() => { setSearch(''); handleCategory('All'); }} style={styles.resetBtn}>

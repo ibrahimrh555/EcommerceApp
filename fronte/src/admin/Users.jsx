@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAdmin } from '../context/AdminContext';
+import { ArrowDown, ArrowUp, Search, ShieldCheck, Trash2, User } from 'lucide-react';
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -65,7 +66,7 @@ export default function Users() {
       <div style={styles.searchWrap}>
         <input
           type="text"
-          placeholder="🔍  Rechercher par nom ou email..."
+          placeholder="Rechercher par nom ou email..."
           value={search}
           onChange={e => setSearch(e.target.value)}
           style={styles.searchInput}
@@ -93,7 +94,11 @@ export default function Users() {
                   <td style={styles.td}><span style={styles.email}>{u.email}</span></td>
                   <td style={styles.td}>
                     <span style={{ ...styles.roleBadge, ...(u.role === 'admin' ? styles.roleAdmin : styles.roleUser) }}>
-                      {u.role === 'admin' ? '⭐ Admin' : '👤 Client'}
+                      {u.role === 'admin' ? (
+                        <><ShieldCheck size={14} style={styles.inlineIcon} aria-hidden="true" />Admin</>
+                      ) : (
+                        <><User size={14} style={styles.inlineIcon} aria-hidden="true" />Client</>
+                      )}
                     </span>
                   </td>
                   <td style={styles.td}>{new Date(u.createdAt).toLocaleDateString('fr-FR')}</td>
@@ -102,9 +107,13 @@ export default function Users() {
                       {u._id !== admin?._id && (
                         <>
                           <button onClick={() => handleRoleToggle(u._id, u.role)} style={styles.btnRole}>
-                            {u.role === 'admin' ? '↓ Rétrograder' : '↑ Promouvoir'}
+                            {u.role === 'admin' ? (
+                              <><ArrowDown size={14} style={styles.inlineIcon} aria-hidden="true" />Rétrograder</>
+                            ) : (
+                              <><ArrowUp size={14} style={styles.inlineIcon} aria-hidden="true" />Promouvoir</>
+                            )}
                           </button>
-                          <button onClick={() => handleDelete(u._id, u.name)} style={styles.btnDelete}>🗑 Supprimer</button>
+                          <button onClick={() => handleDelete(u._id, u.name)} style={styles.btnDelete}><Trash2 size={14} style={styles.inlineIcon} aria-hidden="true" />Supprimer</button>
                         </>
                       )}
                     </div>
@@ -135,6 +144,7 @@ const styles = {
   alertErr: { background: 'rgba(220,50,50,0.12)', border: '1px solid rgba(220,50,50,0.3)', color: '#ff6b6b' },
   searchWrap: { marginBottom: '1.5rem' },
   searchInput: { width: '100%', maxWidth: '400px', padding: '10px 14px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' },
+  inlineIcon: { marginRight: '6px', verticalAlign: 'middle' },
   tableWrap: { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'auto' },
   table: { width: '100%', borderCollapse: 'collapse', minWidth: '640px' },
   th: { padding: '1rem', color: 'rgba(255,255,255,0.35)', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'left', borderBottom: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' },

@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import { useAdmin } from '../context/AdminContext';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function AdminLayout() {
   const { sidebarOpen, setSidebarOpen } = useAdmin();
@@ -13,7 +14,7 @@ export default function AdminLayout() {
         {/* Topbar */}
         <header style={styles.topbar}>
           <button onClick={() => setSidebarOpen(o => !o)} style={styles.toggleBtn} title="Toggle sidebar">
-            <span style={{ fontSize: '1.2rem' }}>{sidebarOpen ? '◀' : '▶'}</span>
+            {sidebarOpen ? <ChevronLeft size={20} aria-hidden="true" /> : <ChevronRight size={20} aria-hidden="true" />}
           </button>
           <div style={styles.topbarRight}>
             <span style={styles.badge}>Admin Panel</span>
