@@ -1,151 +1,172 @@
-# LuxeShop — Application E-Commerce Full-Stack
+# LuxeShop — Application E‑Commerce Full‑Stack
 
-Une application e-commerce complète construite avec **React.js** (frontend) et **Express.js + MongoDB** (backend).
+Application e‑commerce complète construite avec **React (CRA)** côté client et **Express + MongoDB** côté serveur.
 
----
-
-## 🏗️ Architecture
+## Architecture
 
 ```
 ecommerce-app/
 ├── backend/
 │   ├── models/
-│   │   ├── User.js          # Modèle utilisateur (bcrypt, JWT)
-│   │   ├── Product.js       # Modèle produit (avis inclus)
-│   │   └── Order.js         # Modèle commande
+│   │   ├── User.js
+│   │   ├── Product.js
+│   │   └── Order.js
 │   ├── routes/
-│   │   ├── authRoutes.js    # Register, Login, Profile
-│   │   ├── productRoutes.js # CRUD produits + avis
-│   │   └── orderRoutes.js   # Créer/lister/détail commandes
+│   │   ├── authRoutes.js
+│   │   ├── productRoutes.js
+│   │   ├── orderRoutes.js
+│   │   ├── paymentRoutes.js
+│   │   └── Adminroutes.js
 │   ├── middleware/
-│   │   └── auth.js          # Middleware JWT (protect, admin)
-│   ├── server.js            # Point d'entrée Express
-│   ├── seed.js              # Données de démonstration
-│   └── .env                 # Variables d'environnement
-└── frontend/
+│   │   └── auth.js
+│   ├── seed.js
+│   └── server.js
+└── fronte/
+    ├── public/
     └── src/
-        ├── context/
-        │   ├── AuthContext.jsx  # Gestion état utilisateur
-        │   └── CartContext.jsx  # Gestion panier (localStorage)
+        ├── admin/
         ├── components/
-        │   └── Navbar.jsx
+        ├── context/
         ├── pages/
-        │   ├── Home.jsx         # Catalogue + recherche + filtres
-        │   ├── ProductPage.jsx  # Détail produit + avis
-        │   ├── Cart.jsx         # Panier + checkout 3 étapes
-        │   ├── Login.jsx
-        │   ├── Register.jsx
-        │   ├── Orders.jsx       # Mes commandes
-        │   └── OrderDetail.jsx  # Suivi commande
-        └── App.jsx              # Routes + providers
+        └── user/
 ```
 
----
+## Prérequis
 
-## ⚡ Installation
-
-### Prérequis
 - Node.js 18+
-- MongoDB (local ou MongoDB Atlas)
+- MongoDB (local ou Atlas)
 
-### 1. Backend
+## Installation & démarrage
+
+### 1) Backend
 
 ```bash
-cd ecommerce-app/backend
+cd backend
 npm install
 ```
 
-Configurer le fichier `.env` :
+Créer `backend/.env` :
+
 ```
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/ecommerce
 JWT_SECRET=change_this_secret_in_production
 NODE_ENV=development
+
+# Stripe (optionnel si vous n'utilisez pas le paiement)
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
 ```
 
-Alimenter la base de données (optionnel) :
+Seeder la base (optionnel) :
+
 ```bash
+cd backend
 node seed.js
-# Crée 8 produits + 1 compte admin (admin@shop.com / admin123)
+# Crée des produits + 1 compte admin : admin@shop.com / admin123
 ```
 
-Démarrer le backend :
+Lancer le serveur :
+
 ```bash
-npm run dev     # développement (nodemon)
-npm start       # production
+cd backend
+npm run dev
+# ou
+npm start
 ```
 
-### 2. Frontend
+Endpoint de santé : `GET /api/health`.
+
+### 2) Frontend
+
+Le frontend est dans le dossier `fronte/` et est configuré avec un `proxy` vers `http://localhost:5000`.
 
 ```bash
-cd ecommerce-app/frontend
+cd fronte
 npm install
 npm start
 ```
 
-L'application sera disponible sur **http://localhost:3000**
+Application : http://localhost:3000
 
----
-
-## 🔌 API Endpoints
+## API
 
 ### Auth
+
 | Méthode | Route | Description |
-|---------|-------|-------------|
+|---|---|---|
 | POST | `/api/auth/register` | Créer un compte |
 | POST | `/api/auth/login` | Se connecter |
 | GET | `/api/auth/profile` | Profil (auth requis) |
 | PUT | `/api/auth/profile` | Modifier profil |
 
 ### Produits
+
 | Méthode | Route | Description |
-|---------|-------|-------------|
-| GET | `/api/products` | Liste (filtre par `?keyword=&category=`) |
+|---|---|---|
+| GET | `/api/products` | Liste (filtres : `?keyword=&category=`) |
 | GET | `/api/products/:id` | Détail produit |
 | POST | `/api/products` | Créer (admin) |
 | PUT | `/api/products/:id` | Modifier (admin) |
 | DELETE | `/api/products/:id` | Supprimer (admin) |
-| POST | `/api/products/:id/reviews` | Ajouter avis (auth) |
+| POST | `/api/products/:id/reviews` | Ajouter un avis (auth) |
 
 ### Commandes
+
 | Méthode | Route | Description |
-|---------|-------|-------------|
+|---|---|---|
 | POST | `/api/orders` | Créer une commande |
 | GET | `/api/orders/myorders` | Mes commandes |
-| GET | `/api/orders/:id` | Détail commande |
+| GET | `/api/orders/:id` | Détail commande (owner ou admin) |
 | GET | `/api/orders` | Toutes les commandes (admin) |
 | PUT | `/api/orders/:id/status` | Modifier statut (admin) |
 
----
+Notes :
 
-## ✨ Fonctionnalités
+- Frais de livraison : 0€ si total > 100€, sinon 10€.
+- Le stock est décrémenté à la création de commande.
 
-- **Catalogue produits** avec recherche et filtres par catégorie
-- **Fiche produit détaillée** avec galerie, stock, et système d'avis
-- **Panier persistant** (localStorage) avec gestion des quantités
-- **Checkout en 3 étapes** : panier → livraison → confirmation
-- **Authentification JWT** (register/login/logout)
-- **Suivi de commandes** avec indicateur de progression visuel
-- **Livraison gratuite** automatique à partir de 100€
-- **Gestion des stocks** (décrémentation automatique)
-- **Rôles admin/user**
+### Admin
 
----
+| Méthode | Route | Description |
+|---|---|---|
+| GET | `/api/admin/stats` | Stats globales |
+| GET | `/api/admin/products` | Liste produits |
+| POST | `/api/admin/products` | Créer produit |
+| PUT | `/api/admin/products/:id` | Modifier produit |
+| DELETE | `/api/admin/products/:id` | Supprimer produit |
+| GET | `/api/admin/orders` | Liste commandes |
+| PUT | `/api/admin/orders/:id` | Modifier commande |
+| GET | `/api/admin/users` | Liste utilisateurs |
+| DELETE | `/api/admin/users/:id` | Supprimer utilisateur |
+| PUT | `/api/admin/users/:id/role` | Changer rôle |
 
+### Paiement (Stripe)
 
-## 🚀 Déploiement
+| Méthode | Route | Description |
+|---|---|---|
+| POST | `/api/payment/create-intent` | Crée un PaymentIntent (auth) |
+| POST | `/api/payment/confirm/:orderId` | Marque la commande payée (auth) |
+| POST | `/api/payment/webhook` | Webhook Stripe (server-to-server) |
 
-### Variables d'environnement en production
+## Déploiement
+
+### Variables d'environnement (prod)
+
 ```
 MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/ecommerce
 JWT_SECRET=un_secret_tres_long_et_aleatoire
 NODE_ENV=production
 PORT=5000
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
 ```
 
 ### Build frontend
+
 ```bash
-cd frontend && npm run build
+cd fronte
+npm run build
 ```
 
-Servir le dossier `build/` depuis Express en production, ou déployer sur Vercel/Netlify.
+Le dossier `fronte/build/` peut ensuite être servi par un serveur statique (Netlify/Vercel) ou via Express (si vous ajoutez la configuration correspondante).
