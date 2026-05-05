@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { Gem, ShoppingCart } from 'lucide-react';
+import { Gem, Heart, ShoppingCart } from 'lucide-react';
+import { useFavorites } from '../context/FavoritesContext';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const { totalItems } = useCart();
   const navigate = useNavigate();
+  const { totalFavorites } = useFavorites();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
@@ -38,6 +40,12 @@ export default function Navbar() {
               <Link to="/register" style={styles.btnRegister}>S'inscrire</Link>
             </>
           )}
+          {/* Favorites icon */}
+          <Link to="/favorites" style={styles.cartBtn} title="Mes favoris">
+            <Heart size={20} size={22} aria-hidden="true"  />
+            {totalFavorites > 0 && <span style={{ ...styles.badge, background: '#ff6b6b' }}>{totalFavorites}</span>}
+          </Link>
+
           <Link to="/cart" style={styles.cartBtn}>
             <ShoppingCart size={22} aria-hidden="true" />
             {totalItems > 0 && <span style={styles.badge}>{totalItems}</span>}
@@ -125,6 +133,19 @@ const styles = {
     fontSize: '1.3rem',
     display: 'flex',
     alignItems: 'center',
+  },
+  iconBtn: {
+    position: 'relative',
+    color: '#ff6b6b',
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '36px',
+    height: '36px',
+    borderRadius: '8px',
+    border: '1px solid rgba(255,255,255,0.12)',
+    background: 'rgba(255,255,255,0.03)',
   },
   cartIcon: { fontSize: '1.4rem' },
   badge: {

@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { AdminProvider } from './context/AdminContext';
+import { FavoritesProvider } from './context/FavoritesContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProductList from './user/ProductList';
@@ -21,6 +22,7 @@ import AdminProducts from './admin/Products';
 import AdminOrders from './admin/Orders';
 import AdminUsers from './admin/Users';
 import Payment from './user/Payment';
+import Favorites from './user/Favorites';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -31,17 +33,18 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <AdminProvider>
-          <Router>
-            <style>{`
-              * { margin: 0; padding: 0; box-sizing: border-box; }
-              body { background: #09090f; }
-              @keyframes spin { to { transform: rotate(360deg); } }
-              input::placeholder { color: rgba(255,255,255,0.2); }
-              select option { background: #1a1a2e; color: #fff; }
-              a:hover { opacity: 0.85; }
-            `}</style>
-            <Routes>
+        <FavoritesProvider>
+          <AdminProvider>
+            <Router>
+              <style>{`
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { background: #09090f; }
+                @keyframes spin { to { transform: rotate(360deg); } }
+                input::placeholder { color: rgba(255,255,255,0.2); }
+                select option { background: #1a1a2e; color: #fff; }
+                a:hover { opacity: 0.85; }
+              `}</style>
+              <Routes>
  
               {/* ── ADMIN routes ── */}
               <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
@@ -59,20 +62,22 @@ function App() {
               <Route path="/cart" element={<><Navbar /><Cart /></>} />
               <Route path="/login" element={<><Navbar /><Login /></>} />
               <Route path="/register" element={<><Navbar /><Register /></>} />
+              <Route path="/favorites" element={<><Navbar /><Favorites /></>} />
               <Route path="/orders" element={<><Navbar /><PrivateRoute><Orders /></PrivateRoute></>} />
               <Route path="/orders/:id" element={<><Navbar /><PrivateRoute><OrderDetail /></PrivateRoute></>} />
               <Route path="/payment/:orderId" element={<><Navbar /><PrivateRoute><Payment /></PrivateRoute></>} />
  
-            </Routes>
-            <Toaster
-              position="bottom-right"
-              toastOptions={{
-                style: { background: '#1a1a2e', color: '#fff', border: '1px solid rgba(255,215,0,0.2)', borderRadius: '8px' },
-                success: { iconTheme: { primary: '#FFD700', secondary: '#000' } },
-              }}
-            />
-          </Router>
-        </AdminProvider>
+              </Routes>
+              <Toaster
+                position="bottom-right"
+                toastOptions={{
+                  style: { background: '#1a1a2e', color: '#fff', border: '1px solid rgba(255,215,0,0.2)', borderRadius: '8px' },
+                  success: { iconTheme: { primary: '#FFD700', secondary: '#000' } },
+                }}
+              />
+            </Router>
+          </AdminProvider>
+        </FavoritesProvider>
       </CartProvider>
     </AuthProvider>
   );
