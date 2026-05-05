@@ -2,6 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import {
+  FaArrowLeft,
+  FaLock,
+  FaCreditCard,
+  FaCog,
+  FaExclamationTriangle,
+  FaShieldAlt,
+  FaCheckCircle,
+} from 'react-icons/fa';
 
 /*
   Cette page charge dynamiquement Stripe.js depuis le CDN Stripe officiel.
@@ -122,7 +131,7 @@ export default function Payment() {
         await axios.post(`/api/payment/confirm/${orderId}`, {
           paymentIntentId: paymentIntent.id,
         });
-        toast.success('Paiement réussi ! 🎉');
+        toast.success('Paiement réussi !');
         navigate(`/orders/${orderId}`);
       }
     } catch (err) {
@@ -149,7 +158,7 @@ export default function Payment() {
 
         {/* Header */}
         <div style={s.header}>
-          <button onClick={() => navigate(-1)} style={s.backBtn}>← Retour</button>
+          <button onClick={() => navigate(-1)} style={s.backBtn}><FaArrowLeft style={{ marginRight: 8 }} />Retour</button>
           <div>
             <h1 style={s.title}>Paiement sécurisé</h1>
             <p style={s.sub}>Commande #{orderId?.slice(-8).toUpperCase()}</p>
@@ -163,7 +172,7 @@ export default function Payment() {
             {/* Config warning */}
             {needsConfig && (
               <div style={s.configWarning}>
-                <h3 style={s.warnTitle}>⚙️ Configuration Stripe requise</h3>
+                <h3 style={s.warnTitle}><FaCog style={{ marginRight: 8 }} />Configuration Stripe requise</h3>
                 <p style={s.warnText}>Pour activer les paiements réels :</p>
                 <ol style={s.warnList}>
                   <li>Créer un compte sur <strong>stripe.com</strong></li>
@@ -177,7 +186,7 @@ export default function Payment() {
                   <li>Installer Stripe backend : <code style={s.code}>npm install stripe</code></li>
                 </ol>
                 <p style={{ ...s.warnText, marginTop: '0.75rem' }}>
-                  🧪 En mode test, utilisez la carte : <strong style={{ color: '#FFD700' }}>4242 4242 4242 4242</strong>
+                  En mode test, utilisez la carte : <strong style={{ color: '#FFD700' }}>4242 4242 4242 4242</strong>
                 </p>
               </div>
             )}
@@ -185,7 +194,7 @@ export default function Payment() {
             {/* Stripe Card Element */}
             <div style={s.card}>
               <div style={s.cardHeader}>
-                <h2 style={s.cardTitle}>💳 Informations de paiement</h2>
+                <h2 style={s.cardTitle}><FaCreditCard style={{ marginRight: 10 }} />Informations de paiement</h2>
                 <div style={s.stripeBadge}>
                   <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>Sécurisé par</span>
                   <svg width="40" height="16" viewBox="0 0 60 25"><text x="0" y="19" fontFamily="Arial" fontWeight="800" fontSize="20" fill="rgba(255,255,255,0.4)">stripe</text></svg>
@@ -197,7 +206,7 @@ export default function Payment() {
                 <div ref={cardRef} style={s.stripeInput}></div>
               </div>
 
-              {error && <div style={s.errorBox}>⚠ {error}</div>}
+              {error && <div style={s.errorBox}><FaExclamationTriangle style={{ marginRight: 8 }} />{error}</div>}
 
               <button
                 onClick={handlePay}
@@ -209,16 +218,18 @@ export default function Payment() {
                     <span style={s.smallSpinner}></span> Traitement en cours...
                   </span>
                 ) : (
-                  `🔒 Payer ${order?.totalPrice?.toFixed(2)} €`
+                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                    <FaLock /> Payer {order?.totalPrice?.toFixed(2)} €
+                  </span>
                 )}
               </button>
             </div>
 
             {/* Security info */}
             <div style={s.secInfo}>
-              <div style={s.secItem}><span>🔒</span><span>Chiffrement SSL 256-bit</span></div>
-              <div style={s.secItem}><span>🛡</span><span>Authentification 3D Secure</span></div>
-              <div style={s.secItem}><span>✓</span><span>Données jamais stockées</span></div>
+              <div style={s.secItem}><span><FaLock /></span><span>Chiffrement SSL 256-bit</span></div>
+              <div style={s.secItem}><span><FaShieldAlt /></span><span>Authentification 3D Secure</span></div>
+              <div style={s.secItem}><span><FaCheckCircle /></span><span>Données jamais stockées</span></div>
             </div>
           </div>
 

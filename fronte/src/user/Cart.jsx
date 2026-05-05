@@ -4,6 +4,19 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import {
+  FaCcVisa,
+  FaCcMastercard,
+  FaCcAmex,
+  FaMoneyCheckAlt,
+  FaShoppingCart,
+  FaMapMarkerAlt,
+  FaCreditCard,
+  FaLock,
+  FaShieldAlt,
+  FaCheckCircle,
+} from 'react-icons/fa';
+
 
 const STEPS = ['Panier', 'Livraison', 'Paiement'];
 
@@ -23,6 +36,12 @@ export default function Cart() {
   const handleCheckout = () => {
     if (!user) { toast.error('Connectez-vous pour passer commande'); navigate('/login'); return; }
     setStep(1);
+  };
+
+  const CARD_ICONS = {
+    'VISA': FaCcVisa,
+    'MC': FaCcMastercard,
+    'AMEX': FaCcAmex,
   };
 
   const handleShippingNext = () => {
@@ -66,7 +85,7 @@ export default function Cart() {
     return (
       <div style={s.page}>
         <div style={s.emptyCart}>
-          <span style={{ fontSize: '5rem' }}>🛒</span>
+          <span style={{ fontSize: '5rem' }}><FaShoppingCart size={72} color="#FFD700" /></span>
           <h2 style={s.emptyTitle}>Votre panier est vide</h2>
           <p style={s.emptySub}>Découvrez notre catalogue pour trouver vos produits préférés.</p>
           <Link to="/catalogue" style={s.shopLink}>Commencer mes achats</Link>
@@ -119,7 +138,7 @@ export default function Cart() {
             {/* STEP 1 — SHIPPING */}
             {step === 1 && (
               <div style={s.card}>
-                <h2 style={s.cardTitle}>📍 Adresse de livraison</h2>
+                <h2 style={s.cardTitle}><FaMapMarkerAlt size={16} color="#FFD700" /> Adresse de livraison</h2>
                 <div style={s.formGrid}>
                   {[['street', 'Rue et numéro', 'col-span'], ['city', 'Ville', ''], ['postalCode', 'Code postal', ''], ['country', 'Pays', '']].map(([field, label, span]) => (
                     <div key={field} style={{ ...s.fieldGroup, ...(span === 'col-span' ? { gridColumn: '1 / -1' } : {}) }}>
@@ -140,7 +159,7 @@ export default function Cart() {
             {/* STEP 2 — PAYMENT METHOD */}
             {step === 2 && (
               <div style={s.card}>
-                <h2 style={s.cardTitle}>💳 Mode de paiement</h2>
+                <h2 style={s.cardTitle}><FaCreditCard size={16} color="#FFD700" /> Mode de paiement</h2>
                 <div style={s.methodGrid}>
                   {/* Stripe Card */}
                   <button
@@ -155,9 +174,17 @@ export default function Cart() {
                     <p style={s.methodName}>Carte bancaire</p>
                     <p style={s.methodSub}>Visa, Mastercard, Amex — sécurisé par Stripe</p>
                     <div style={s.cardLogos}>
-                      {['VISA', 'MC', 'AMEX'].map(c => (
-                        <span key={c} style={{ ...s.cardLogo, ...(paymentMethod === 'stripe' ? s.cardLogoActive : {}) }}>{c}</span>
-                      ))}
+                      {['VISA', 'MC', 'AMEX'].map(c => {
+                        const IconComponent = CARD_ICONS[c]; // Get the component for this key
+                        return (
+                          <span 
+                            key={c} 
+                            style={{ ...s.cardLogo, ...(paymentMethod === 'stripe' ? s.cardLogoActive : {}) }}
+                          >
+                            <IconComponent size={24} /> 
+                          </span>
+                        );
+                      })}
                     </div>
                     {paymentMethod === 'stripe' && <div style={s.selectedCheck}>✓ Sélectionné</div>}
                   </button>
@@ -167,7 +194,7 @@ export default function Cart() {
                     onClick={() => setPaymentMethod('cod')}
                     style={{ ...s.methodBtn, ...(paymentMethod === 'cod' ? s.methodBtnActive : {}) }}
                   >
-                    <div style={s.methodIcon}>💵</div>
+                    <div style={s.methodIcon}><FaMoneyCheckAlt size={32} color= '#FFD700' /></div>
                     <p style={s.methodName}>Paiement à la livraison</p>
                     <p style={s.methodSub}>Payez en espèces à la réception de votre colis</p>
                     {paymentMethod === 'cod' && <div style={s.selectedCheck}>✓ Sélectionné</div>}
@@ -185,7 +212,8 @@ export default function Cart() {
                     </div>
                   ))}
                   <div style={s.recapAddr}>
-                    📍 {shipping.street}, {shipping.city} {shipping.postalCode}, {shipping.country}
+                    <FaMapMarkerAlt style={{ marginRight: 8 }} />
+                    {shipping.street}, {shipping.city} {shipping.postalCode}, {shipping.country}
                   </div>
                 </div>
               </div>
@@ -221,7 +249,17 @@ export default function Cart() {
             {step === 2 && (
               <>
                 <button onClick={handleGoToPayment} disabled={placing} style={s.checkoutBtn}>
-                  {placing ? '⏳ Traitement...' : paymentMethod === 'stripe' ? '💳 Payer maintenant' : '✓ Confirmer la commande'}
+                  {placing ? (
+                    'Traitement...'
+                  ) : paymentMethod === 'stripe' ? (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+                      <FaCreditCard /> Payer maintenant
+                    </span>
+                  ) : (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+                      <FaCheckCircle /> Confirmer la commande
+                    </span>
+                  )}
                 </button>
                 <button onClick={() => setStep(1)} style={s.backBtn}>← Modifier livraison</button>
               </>
@@ -229,9 +267,9 @@ export default function Cart() {
 
             {/* Security badges */}
             <div style={s.securityRow}>
-              <span style={s.secBadge}>🔒 SSL</span>
-              <span style={s.secBadge}>✓ Stripe Secure</span>
-              <span style={s.secBadge}>🛡 3D Secure</span>
+              <span style={s.secBadge}><FaLock style={{ marginRight: 6 }} />SSL</span>
+              <span style={s.secBadge}><FaCheckCircle style={{ marginRight: 6 }} />Stripe Secure</span>
+              <span style={s.secBadge}><FaShieldAlt style={{ marginRight: 6 }} />3D Secure</span>
             </div>
           </div>
         </div>

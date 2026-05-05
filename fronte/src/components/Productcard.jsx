@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 import toast from 'react-hot-toast';
-import { Heart } from 'lucide-react';
+import { Heart, HeartOff } from 'lucide-react';
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
@@ -22,7 +22,11 @@ export default function ProductCard({ product }) {
     e.preventDefault();
     toggleFavorite(product);
     toast(fav ? 'Retiré des favoris' : 'Ajouté aux favoris !', {
-      icon: fav ? '💔' : '❤️',
+      icon: fav ? (
+        <HeartOff size={16} color="#FFD700" aria-hidden="true" />
+      ) : (
+        <Heart size={16} color="#FFD700" fill="#FFD700" aria-hidden="true" />
+      ),
     });
   };
 
@@ -94,7 +98,7 @@ const s = {
   heartBtnActive: {
     background: 'rgba(220,50,50,0.25)',
     border: '1px solid rgba(220,50,50,0.5)',
-    color: '#ff6b6b',
+    color: '#FFD700',
   },
   cardBody: { padding: '1.2rem' },
   cardName: { fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem', lineHeight: 1.4 },
