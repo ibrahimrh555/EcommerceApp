@@ -147,6 +147,7 @@ const styles = {
     fontSize: 'clamp(2.8rem, 7vw, 5rem)',
     fontFamily: '"Playfair Display", Georgia, serif',
     fontWeight: 900, lineHeight: 1.08, marginBottom: '1.5rem',
+    color: '#ffffff',
   },
   heroAccent: { color: '#FFD700' },
   heroSub: { color: 'rgba(255,255,255,0.5)', fontSize: '1.05rem', lineHeight: 1.8, marginBottom: '2.5rem' },
