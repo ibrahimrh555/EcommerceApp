@@ -7,7 +7,10 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
+// IMPORTANT: le webhook Stripe doit recevoir le body RAW (avant express.json)
+app.use('/api/payment/webhook', express.raw({ type: 'application/json' }));
+
+// Middleware global
 app.use(cors());
 app.use(express.json());
 
@@ -22,6 +25,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
+app.use('/api/payment', require('./routes/paymentRoutes'));
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date() }));

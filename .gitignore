@@ -54,3 +54,6 @@ coverage/
 # Optional
 # package-lock.json
 # yarn.lock
+
+STRIPE_SECRET_KEY=sk_test_51TTXPPFtlS5uJXJzOBaNOGfPbUJx7rMdhUxKgae3914ktEryS78QosuZmzh0YuxITIManxSygefmzxfV1GQB6JV300FQ0WXsts
+STRIPE_WEBHOOK_SECRET=whsec_...

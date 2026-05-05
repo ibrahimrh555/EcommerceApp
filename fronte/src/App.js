@@ -20,12 +20,13 @@ import Dashboard from './admin/Dashboard';
 import AdminProducts from './admin/Products';
 import AdminOrders from './admin/Orders';
 import AdminUsers from './admin/Users';
+import Payment from './user/Payment';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
   return user ? children : <Navigate to="/login" />;
 }
-
+ 
 function App() {
   return (
     <AuthProvider>
@@ -41,8 +42,8 @@ function App() {
               a:hover { opacity: 0.85; }
             `}</style>
             <Routes>
-
-              {/* ── ADMIN routes (own layout, no Navbar) ── */}
+ 
+              {/* ── ADMIN routes ── */}
               <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
                 <Route index element={<Navigate to="/admin/dashboard" replace />} />
                 <Route path="dashboard" element={<Dashboard />} />
@@ -50,8 +51,8 @@ function App() {
                 <Route path="orders" element={<AdminOrders />} />
                 <Route path="users" element={<AdminUsers />} />
               </Route>
-
-              {/* ── SHOP routes (with Navbar) ── */}
+ 
+              {/* ── SHOP routes ── */}
               <Route path="/" element={<><Navbar /><Home /></>} />
               <Route path="/catalogue" element={<><Navbar /><ProductList /></>} />
               <Route path="/product/:id" element={<><Navbar /><ProductPage /></>} />
@@ -60,7 +61,8 @@ function App() {
               <Route path="/register" element={<><Navbar /><Register /></>} />
               <Route path="/orders" element={<><Navbar /><PrivateRoute><Orders /></PrivateRoute></>} />
               <Route path="/orders/:id" element={<><Navbar /><PrivateRoute><OrderDetail /></PrivateRoute></>} />
-
+              <Route path="/payment/:orderId" element={<><Navbar /><PrivateRoute><Payment /></PrivateRoute></>} />
+ 
             </Routes>
             <Toaster
               position="bottom-right"
@@ -75,5 +77,6 @@ function App() {
     </AuthProvider>
   );
 }
-
+ 
 export default App;
+ 
