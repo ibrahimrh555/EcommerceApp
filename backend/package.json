@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.2.2",
+    "mongoose": "^7.8.9",
     "stripe": "^22.1.0"
   },
   "devDependencies": {
